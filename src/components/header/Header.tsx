@@ -47,15 +47,7 @@ function Header({ setMetal }: HeaderProps) {
             alt="app logo"
             width={100}
           />
-          <h2
-            className="text-2xl font-semibold  font-poppins
-            bg-gradient-to-r bg-clip-text  text-transparent 
-            from-[#FC2E20] via-[#ffad4a] to̦-[#FD7F20]
-            ml-10
-            animate-text"
-          >
-            GoldSmith DeFi
-          </h2>
+          <h2 className="text-[26px] font-semibold ml-10">GoldSmith Finacne</h2>
 
           <Box display="flex" alignItems="center" justifyContent="flex-end" flexGrow={1} gap={1}>
             {/* chain label */}

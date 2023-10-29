@@ -73,8 +73,8 @@ const ChainSelector = () => {
                         <div
                           style={{
                             background: chain.iconBackground,
-                            width: 12,
-                            height: 12,
+                            width: 24,
+                            height: 24,
                             borderRadius: 999,
                             overflow: 'hidden',
                             marginRight: 4
@@ -84,7 +84,7 @@ const ChainSelector = () => {
                             <img
                               alt={chain.name ?? 'Chain icon'}
                               src={chain.iconUrl}
-                              style={{ width: 12, height: 12 }}
+                              style={{ width: 24, height: 24 }}
                             />
                           )}
                         </div>

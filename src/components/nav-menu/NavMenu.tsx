@@ -10,41 +10,10 @@ const NavMenu = ({ activePath, setPath }: NavMenuProps) => {
 
   return (
     <div
-      className=" flex flex-col px-[20px] py-[20px] [ border-[2px] border-solid border-black-400 border-opacity-10 rounded-2xl ]"
+      className=" flex flex-col w-[17rem] px-[20px] py-[20px] [ border-[2px] border-solid border-black-400 border-opacity-10 rounded-2xl ]"
       role="group"
       aria-label="Button group"
     >
-      <button
-        onClick={() => {
-          router.push('/buy')
-          setPath('buy')
-        }}
-        className="[ border-[2px] border-solid border-black-300 border-opacity-10 rounded-2xl ] w-96 relative inline-flex items-center justify-center inline-block p-4 px-5 py-6 overflow-hidden font-medium text-black-400 rounded-lg shadow-md group "
-      >
-        <span
-          className={`absolute top-0 left-0 w-96 h-96 -mt-40 -ml-2 transition-all duration-700 ${
-            activePath === 'buy' ? 'bg-[#ffc300]' : 'white'
-          } rounded-full blur-md ease`}
-        ></span>
-        <span
-          className={
-            'absolute inset-0 w-full h-full transition duration-700 group-hover:rotate-180 ease'
-          }
-        >
-          <span
-            className={`absolute bottom-0 left-0 w-64 h-64 -ml-20 ${
-              activePath === 'buy' ? 'bg-[#ffad4a]' : 'white'
-            } rounded-full blur-md`}
-          ></span>
-          <span
-            className={`absolute bottom-0 right-0 w-64 h-64 -mr-20 ${
-              activePath === 'buy' ? 'bg-[#facc15]' : 'white'
-            } rounded-full blur-md`}
-          ></span>
-        </span>
-        <span className="relative text-black-400 font-poppins font-semibold">BUY</span>
-      </button>
-
       <button
         onClick={() => {
           router.push('/burn')
@@ -74,37 +43,7 @@ const NavMenu = ({ activePath, setPath }: NavMenuProps) => {
           ></span>
         </span>
 
-        <span className="relative text-black-400 font-poppins font-semibold">BURN</span>
-      </button>
-      <button
-        onClick={() => {
-          router.push('/borrow')
-          setPath('borrow')
-        }}
-        className="[ border-[1px] border-solid border-black-400 border-opacity-60 rounded-2xl ] mt-5 relative inline-flex items-center justify-center inline-block p-4 px-5 py-5 overflow-hidden font-medium  rounded-lg shadow-md group"
-      >
-        <span
-          className={`absolute top-0 left-0 w-96 h-96 -mt-40 -ml-2 transition-all duration-700 ${
-            activePath === 'borrow' ? 'bg-[#ffc300]' : 'white'
-          } rounded-full blur-md ease`}
-        ></span>
-        <span
-          className={
-            'absolute inset-0 w-full h-full transition duration-700 group-hover:rotate-180 ease'
-          }
-        >
-          <span
-            className={`absolute bottom-0 left-0 w-64 h-64 -ml-20 ${
-              activePath === 'borrow' ? 'bg-[#ffad4a]' : 'white'
-            } rounded-full blur-md`}
-          ></span>
-          <span
-            className={`absolute bottom-0 right-0 w-64 h-64 -mr-20 ${
-              activePath === 'borrow' ? 'bg-[#facc15]' : 'white'
-            } rounded-full blur-md`}
-          ></span>
-        </span>
-        <span className="relative text-black-400 font-poppins font-semibold">BORROW</span>
+        <span className="relative text-black-400 font-poppins font-semibold">MINT</span>
       </button>
       <button
         onClick={() => {
@@ -138,14 +77,14 @@ const NavMenu = ({ activePath, setPath }: NavMenuProps) => {
       </button>
       <button
         onClick={() => {
-          router.push('/account')
-          setPath('account')
+          router.push('/borrow')
+          setPath('borrow')
         }}
         className="[ border-[1px] border-solid border-black-400 border-opacity-60 rounded-2xl ] mt-5 relative inline-flex items-center justify-center inline-block p-4 px-5 py-5 overflow-hidden font-medium  rounded-lg shadow-md group"
       >
         <span
           className={`absolute top-0 left-0 w-96 h-96 -mt-40 -ml-2 transition-all duration-700 ${
-            activePath === 'account' ? 'bg-[#ffc300]' : 'white'
+            activePath === 'borrow' ? 'bg-[#ffc300]' : 'white'
           } rounded-full blur-md ease`}
         ></span>
         <span
@@ -155,27 +94,27 @@ const NavMenu = ({ activePath, setPath }: NavMenuProps) => {
         >
           <span
             className={`absolute bottom-0 left-0 w-64 h-64 -ml-20 ${
-              activePath === 'account' ? 'bg-[#ffad4a]' : 'white'
+              activePath === 'borrow' ? 'bg-[#ffad4a]' : 'white'
             } rounded-full blur-md`}
           ></span>
           <span
             className={`absolute bottom-0 right-0 w-64 h-64 -mr-20 ${
-              activePath === 'account' ? 'bg-[#facc15]' : 'white'
+              activePath === 'borrow' ? 'bg-[#facc15]' : 'white'
             } rounded-full blur-md`}
           ></span>
         </span>
-        <span className="relative text-black-400 font-poppins font-semibold">MY ACCOUNTS</span>
+        <span className="relative text-black-400 font-poppins font-semibold">BORROW</span>
       </button>
       <button
         onClick={() => {
-          router.push('/claim')
-          setPath('claim')
+          router.push('/repay')
+          setPath('repay')
         }}
         className="[ border-[1px] border-solid border-black-400 border-opacity-60 rounded-2xl ] mt-5 relative inline-flex items-center justify-center inline-block p-4 px-5 py-5 overflow-hidden font-medium  rounded-lg shadow-md group"
       >
         <span
           className={`absolute top-0 left-0 w-96 h-96 -mt-40 -ml-2 transition-all duration-700 ${
-            activePath === 'claim' ? 'bg-[#ffc300]' : 'white'
+            activePath === 'repay' ? 'bg-[#ffc300]' : 'white'
           } rounded-full blur-md ease`}
         ></span>
         <span
@@ -185,16 +124,46 @@ const NavMenu = ({ activePath, setPath }: NavMenuProps) => {
         >
           <span
             className={`absolute bottom-0 left-0 w-64 h-64 -ml-20 ${
-              activePath === 'claim' ? 'bg-[#ffad4a]' : 'white'
+              activePath === 'repay' ? 'bg-[#ffad4a]' : 'white'
             } rounded-full blur-md`}
           ></span>
           <span
             className={`absolute bottom-0 right-0 w-64 h-64 -mr-20 ${
-              activePath === 'claim' ? 'bg-[#facc15]' : 'white'
+              activePath === 'repay' ? 'bg-[#facc15]' : 'white'
             } rounded-full blur-md`}
           ></span>
         </span>
-        <span className="relative text-black-400 font-poppins font-semibold">CLAIM REWARD</span>
+        <span className="relative text-black-400 font-poppins font-semibold">REPAY</span>
+      </button>
+      <button
+        onClick={() => {
+          router.push('/unsupply')
+          setPath('unsupply')
+        }}
+        className="[ border-[1px] border-solid border-black-400 border-opacity-60 rounded-2xl ] mt-5 relative inline-flex items-center justify-center inline-block p-4 px-5 py-5 overflow-hidden font-medium  rounded-lg shadow-md group"
+      >
+        <span
+          className={`absolute top-0 left-0 w-96 h-96 -mt-40 -ml-2 transition-all duration-700 ${
+            activePath === 'unsupply' ? 'bg-[#ffc300]' : 'white'
+          } rounded-full blur-md ease`}
+        ></span>
+        <span
+          className={
+            'absolute inset-0 w-full h-full transition duration-700 group-hover:rotate-180 ease'
+          }
+        >
+          <span
+            className={`absolute bottom-0 left-0 w-64 h-64 -ml-20 ${
+              activePath === 'unsupply' ? 'bg-[#ffad4a]' : 'white'
+            } rounded-full blur-md`}
+          ></span>
+          <span
+            className={`absolute bottom-0 right-0 w-64 h-64 -mr-20 ${
+              activePath === 'unsupply' ? 'bg-[#facc15]' : 'white'
+            } rounded-full blur-md`}
+          ></span>
+        </span>
+        <span className="relative text-black-400 font-poppins font-semibold">UNSUPPLY</span>
       </button>
     </div>
   )
