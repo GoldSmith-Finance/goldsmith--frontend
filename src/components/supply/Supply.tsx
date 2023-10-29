@@ -21,12 +21,12 @@ const Supply = () => {
 
   return (
     <div
-      className="form-wrapper 
+      className="form-wrapper max-w-[31rem] 
        
          [ flex justify-center items-center ]"
     >
       <form
-        className="signup-form
+        className="signup-form w-[31rem]
        
                rounded-2xl
                text-[#1A2421]

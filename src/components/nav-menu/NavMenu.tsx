@@ -107,7 +107,7 @@ const NavMenu = ({ activePath, setPath }: NavMenuProps) => {
 
         <span className="relative text-black-400 font-poppins font-semibold">TRANSFER</span>
       </button>
-      <button
+      {/* <button
         onClick={() => {
           router.push('/supply')
           setPath('supply')
@@ -256,7 +256,7 @@ const NavMenu = ({ activePath, setPath }: NavMenuProps) => {
           ></span>
         </span>
         <span className="relative text-black-400 font-poppins font-semibold">MISC</span>
-      </button>
+      </button> */}
     </div>
   )
 }

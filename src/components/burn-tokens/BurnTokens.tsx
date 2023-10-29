@@ -1,23 +1,62 @@
 import React, { useState } from 'react'
 import { useAccountHook } from 'src/store/accountContext'
-
+import { erc20ABI, useChainId, useContractRead, useContractWrite } from 'wagmi'
+import { DAI_ADDRESSES, SPOKE_ADDRESSES } from 'src/config/addresses'
+import { SPOKE } from 'src/config/abi/spoke'
+import { BigNumber, FixedNumber } from 'ethers'
 import GoldCoin from '../gold-coin'
 import SilverCoin from '../silver-coin'
 
-const Sell = () => {
+const Burn = () => {
   const { metalType } = useAccountHook()
+  const chainId = useChainId()
 
-  React.useEffect(() => {}, [])
+  const [amountToBurn, setAmountToBurn] = useState(0)
 
-  const [session, setSession] = useState<any>(null)
+  const { data: price } = useContractRead({
+    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    abi: SPOKE,
+    functionName: 'getChainlinkDataFeedLatestAnswer',
+    args: [metalType == 'GOLD' ? 0 : 1],
+    watch: true
+  })
+
+  const { data: feeToMint } = useContractRead({
+    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    abi: SPOKE,
+    functionName: 'estimateFee',
+    args: [2147484198, 250000],
+    watch: true
+  })
+
+  let priceFormatted: number =
+    Math.round(
+      Number(
+        FixedNumber.from(price ? price : 0)
+          .mulUnsafe(FixedNumber.from(10 ** 7))
+          .divUnsafe(FixedNumber.from(311034768))
+          .divUnsafe(FixedNumber.from('1000000000000000000'))
+          .toString()
+      ) * 100
+    ) / 100
+
+  const {
+    // data,
+    write: writeMintMetal,
+    isSuccess: isSuccessMintMetal,
+    isLoading: isLoadingMintMetal
+  } = useContractWrite({
+    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    abi: SPOKE,
+    functionName: 'burnMetal',
+    args: [metalType == 'GOLD' ? 0 : 1, amountToBurn * 10 ** 18],
+    value: feeToMint
+  })
+
   return (
-    <div
-      className="form-wrapper 
-       
-         [ flex justify-center items-center ]"
-    >
+    <div className="form-wrapper max-w-[31rem] [ flex justify-center items-center ]">
       <form
-        className="signup-form
+        className="signup-form w-[31rem]
        
                rounded-2xl
                text-[#1A2421]
@@ -27,24 +66,6 @@ const Sell = () => {
                [ border-[1px] border-solid border-black-400 border-opacity-60 ]
                [ drop-shadow-[0_35px_35px_rgba(244,187,68,0.5)] ]"
       >
-        {/* <Tooltip title={'buy USDC to your Safe address using Stripe payment provider'}>
-
-          <button
-            type="button"
-            className="py-2 px-4 mt-2 font-poppins flex justify-center items-center  bg-black hover:bg-gray-700 focus:ring-gray-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg text-black"
-            onClick={async () => {
-              const result = await openStripeWidget()
-              console.log(result)
-              result && setSession(result)
-              window.location.href = result
-            }}
-            disabled={!chain?.isStripePaymentsEnabled}
-          >
-            BUY USDC
-           
-          </button>
-        </Tooltip> */}
-
         <label
           html-for="text"
           className="form-label relative block mb-2 text-black/50 focus-within:text-[#333] "
@@ -58,23 +79,25 @@ const Sell = () => {
                     [ border-[1px] border-solid border-black-400 border-opacity-60 ]
                     [ bg-white focus:bg-black/25  ] 
                     [ text-[#333] focus:text-black ]"
-            type="email"
-            name="email"
-            id="email"
-            placeholder={metalType === 'GOLD' ? 'GST' : 'SST'}
+            type="number"
+            placeholder={
+              metalType === 'GOLD'
+                ? 'Enter Amount of Gold To Buy in Grams'
+                : 'Enter Amount of Silver To Buy in Grams'
+            }
+            value={amountToBurn}
+            onChange={(e) => {
+              setAmountToBurn(Number(e.target.value))
+            }}
           />
         </label>
-        <span className="font-poppins text-black">
-          {metalType === 'GOLD' ? 'Gold' : 'Silver'} Balance: 0{' '}
-          {metalType === 'GOLD' ? 'GST' : 'SST'}
-        </span>
 
         <div className="flex flex-row gap-2 -ml-2 mt-4">
           <label
             html-for="text"
             className="form-label relative block mb-2 text-black/50 focus-within:text-[#333]"
           ></label>
-          <span className="font-poppins">You will recieve: 0</span>
+          <span className="font-poppins">You will get: {priceFormatted * amountToBurn}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="5%"
@@ -102,16 +125,18 @@ const Sell = () => {
             </g>
           </svg>{' '}
         </div>
-
         <button
           type="button"
-          className="py-2 px-4 mt-20 font-poppins flex justify-center items-center  bg-black hover:bg-gray-700 focus:ring-gray-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg text-black"
+          className="py-2 px-4 mt-4 font-poppins flex justify-center items-center  bg-black hover:bg-gray-700 focus:ring-gray-500 focus:ring-offset-gray-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg text-black"
+          onClick={async () => {
+            await writeMintMetal()
+          }}
         >
-          BURN GOLDSMITH TOKENS
+          Burn GOLDSMITH TOKENS
         </button>
       </form>
     </div>
   )
 }
 
-export default Sell
+export default Burn
