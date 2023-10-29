@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import Header from 'src/components/header/Header'
 import Providers from 'src/components/providers/Providers'
 import BorrowPage from 'src/pages/borrow'
-import BuyPage from 'src/pages/mint'
+import BuyPage from 'src/pages'
 import SellPage from 'src/pages/burn'
 import type { AppProps } from 'next/app'
 import AccountPage from './account'
@@ -42,18 +42,19 @@ function MyApp({ Component, pageProps }: AppProps) {
           flexGrow={1}
           display="flex"
           gap={10}
-          alignItems="flex-start"
-          justifyContent="start"
-          maxWidth="1200px"
+          alignItems="flex-center"
+          justifyContent="center"
           margin="80px auto 42px auto"
           flexDirection={'row'}
         >
-          <NavMenu setPath={setPath} activePath={activePath} />
-          <Component {...pageProps} />
+          <div className="max-w-[1200px] gap-[10rem] flex justify-start">
+            <NavMenu setPath={setPath} activePath={activePath} />
+            <Component {...pageProps} />
 
-          {/* Active Step Component */}
+            {/* Active Step Component */}
 
-          {/* <ActiveStepComponent setStep={setStep} metal={activeType} /> */}
+            {/* <ActiveStepComponent setStep={setStep} metal={activeType} /> */}
+          </div>
         </Box>
       </>
     </Providers>

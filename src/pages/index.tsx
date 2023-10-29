@@ -1,8 +1,20 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './_app'
+import { Box } from '@mui/material'
+import Typography from '@mui/material/Typography'
+import Mint from 'src/components/mint-tokens/MintTokens'
 
-import HomePage from './HomePage'
-export default function Index() {
-  return <HomePage></HomePage>
+import { ConnectContainer } from 'src/components/styles'
+import { useAccountHook } from 'src/store/accountContext'
+
+const MintPage = () => {
+  const { connect, isAuthenticated, userInfo } = useAccountHook()
+
+  return (
+    <>
+      <Box display="flex" flexDirection="column" gap={3}>
+        <Mint />
+      </Box>
+    </>
+  )
 }
+
+export default MintPage
