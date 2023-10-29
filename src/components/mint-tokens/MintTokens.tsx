@@ -22,6 +22,17 @@ const Mint = () => {
     watch: true
   })
 
+  console.log(
+    'here: ',
+    Number(
+      FixedNumber.from(price ? price : 0)
+        .mulUnsafe(FixedNumber.from(10 ** 7))
+        .divUnsafe(FixedNumber.from(311034768))
+        .divUnsafe(FixedNumber.from('1000000000000000000'))
+        .toString()
+    )
+  )
+
   const { data: feeToMint } = useContractRead({
     address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
     abi: SPOKE,
@@ -30,16 +41,13 @@ const Mint = () => {
     watch: true
   })
 
-  let priceFormatted: number =
-    Math.round(
-      Number(
-        FixedNumber.from(price ? price : 0)
-          .mulUnsafe(FixedNumber.from(10 ** 7))
-          .divUnsafe(FixedNumber.from(311034768))
-          .divUnsafe(FixedNumber.from('1000000000000000000'))
-          .toString()
-      ) * 100
-    ) / 100
+  let priceFormatted: number = Number(
+    FixedNumber.from(price ? price : 0)
+      .mulUnsafe(FixedNumber.from(10 ** 7))
+      .divUnsafe(FixedNumber.from(311034768))
+      .divUnsafe(FixedNumber.from('1000000000000000000'))
+      .toString()
+  )
 
   const {
     data,

@@ -23,6 +23,8 @@ const Transfer = () => {
     watch: true
   })
 
+  console.log('fee; ', feeToMint)
+
   const {
     // data,
     write: writeMintMetal,
