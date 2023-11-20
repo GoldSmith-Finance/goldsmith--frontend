@@ -14,7 +14,7 @@ const Burn = () => {
   const [amountToBurn, setAmountToBurn] = useState(0)
 
   const { data: price } = useContractRead({
-    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    address: SPOKE_ADDRESSES[chainId as 888 | 137] as `0x${string}`,
     abi: SPOKE,
     functionName: 'getChainlinkDataFeedLatestAnswer',
     args: [metalType == 'GOLD' ? 0 : 1],
@@ -22,7 +22,7 @@ const Burn = () => {
   })
 
   const { data: feeToMint } = useContractRead({
-    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    address: SPOKE_ADDRESSES[chainId as 888 | 137] as `0x${string}`,
     abi: SPOKE,
     functionName: 'estimateFee',
     args: [2147484198, 250000],
@@ -46,7 +46,7 @@ const Burn = () => {
     isSuccess: isSuccessMintMetal,
     isLoading: isLoadingMintMetal
   } = useContractWrite({
-    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    address: SPOKE_ADDRESSES[chainId as 888 | 137] as `0x${string}`,
     abi: SPOKE,
     functionName: 'burnMetal',
     args: [metalType == 'GOLD' ? 0 : 1, amountToBurn * 10 ** 18],

@@ -15,7 +15,7 @@ const Mint = () => {
   const [amountToBuy, setAmountToBuy] = useState(0)
 
   const { data: price } = useContractRead({
-    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    address: SPOKE_ADDRESSES[chainId as 888 | 137] as `0x${string}`,
     abi: SPOKE,
     functionName: 'getChainlinkDataFeedLatestAnswer',
     args: [metalType == 'GOLD' ? 0 : 1],
@@ -34,7 +34,7 @@ const Mint = () => {
   )
 
   const { data: feeToMint } = useContractRead({
-    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    address: SPOKE_ADDRESSES[chainId as 888 | 137] as `0x${string}`,
     abi: SPOKE,
     functionName: 'estimateFee',
     args: [2147484198, 250000],
@@ -55,11 +55,11 @@ const Mint = () => {
     isSuccess: isSuccessApprove,
     isLoading: isLoadingApprove
   } = useContractWrite({
-    address: DAI_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    address: DAI_ADDRESSES[chainId as 888 | 137] as `0x${string}`,
     abi: erc20ABI,
     functionName: 'approve',
     args: [
-      SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+      SPOKE_ADDRESSES[chainId as 888 | 137] as `0x${string}`,
       priceFormatted * amountToBuy * 10 ** 18
     ]
   })
@@ -70,7 +70,7 @@ const Mint = () => {
     isSuccess: isSuccessMintMetal,
     isLoading: isLoadingMintMetal
   } = useContractWrite({
-    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    address: SPOKE_ADDRESSES[chainId as 888 | 137] as `0x${string}`,
     abi: SPOKE,
     functionName: 'mintMetal',
     args: [metalType == 'GOLD' ? 0 : 1, amountToBuy * 1000],

@@ -16,7 +16,7 @@ const Transfer = () => {
   const [destChain, setDestinationChain] = useState(2153201998)
 
   const { data: feeToMint } = useContractRead({
-    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    address: SPOKE_ADDRESSES[chainId as 888 | 137] as `0x${string}`,
     abi: SPOKE,
     functionName: 'estimateFee',
     args: [destChain, 250000],
@@ -31,7 +31,7 @@ const Transfer = () => {
     isSuccess: isSuccessMintMetal,
     isLoading: isLoadingMintMetal
   } = useContractWrite({
-    address: SPOKE_ADDRESSES[chainId as 51 | 999] as `0x${string}`,
+    address: SPOKE_ADDRESSES[chainId as 888 | 137] as `0x${string}`,
     abi: SPOKE,
     functionName: 'transferTokensCrossChain',
     args: [metalType == 'GOLD' ? 0 : 1, destChain, address, amountToTransfer * 10 ** 18],
@@ -82,10 +82,10 @@ const Transfer = () => {
           className="py-3 px-10 font-semibold font-poppins bg-[#ffc300] border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
         >
           <option value={'GOLD'} onClick={() => setDestinationChain(2153201998)}>
-            Wanchain TestNet
+            Wanchain
           </option>
-          <option value={'SILVER'} onClick={() => setDestinationChain(2147484198)}>
-            Apothem
+          <option value={'SILVER'} onClick={() => setDestinationChain(2147484614)}>
+            Polygon
           </option>
         </select>
         <button

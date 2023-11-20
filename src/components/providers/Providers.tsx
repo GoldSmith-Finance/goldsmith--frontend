@@ -5,7 +5,7 @@ import { AccountHookProvider } from 'src/store/accountContext'
 import { WagmiConfig, configureChains, createConfig, mainnet } from 'wagmi'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
-import { polygon, optimism, arbitrum } from 'viem/chains'
+import { polygon, wanchain } from 'viem/chains'
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
@@ -124,7 +124,7 @@ const wanchain_testnet: Chain = {
   testnet: true
 }
 
-const { chains, publicClient } = configureChains([apothem, wanchain_testnet], [publicProvider()])
+const { chains, publicClient } = configureChains([polygon, wanchain], [publicProvider()])
 
 const { connectors } = getDefaultWallets({
   appName: 'GoldSmith Finance',
