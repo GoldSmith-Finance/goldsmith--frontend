@@ -47,7 +47,7 @@ function Header({ setMetal }: HeaderProps) {
             alt="app logo"
             width={100}
           />
-          <h2 className="text-[26px] font-semibold ml-10">GoldSmith Finacne</h2>
+          <h2 className="text-[26px] font-semibold ml-10">GoldSmith Finance</h2>
 
           <Box display="flex" alignItems="center" justifyContent="flex-end" flexGrow={1} gap={1}>
             {/* chain label */}
